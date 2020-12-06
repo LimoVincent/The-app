@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: rgb(211, 170, 119);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#Container{
+    margin: 10% 25%;
+    background-color: rgb(175, 226, 226);
+    border: 10px solid rgb(33, 86, 94);
+    border-radius: 2%;
+    
+}
+
+ input, button {
+color: bisque;
+padding: 2%;
+border-radius: 2%;
+margin: 0% 5%;
+color: rgb(10, 10, 10);
+font-weight: 300;
+border-radius: 5%;
+}
+p{
+    font-weight: bold;
+    text-align: center;
+    border : 2px solid blue;
+
+}
+.box{
+    background-color: aliceblue;
+    border-radius: 2%;
+}
+
