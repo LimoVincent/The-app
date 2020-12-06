@@ -5,14 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Number Conveter</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./App.js"></script>
 </head>
 
 <body>
-    <div id="Container">
-        <h2>Type Sumation and conversion</h2>
+    <form id="Container">
+        <h2 style="text-align: center;">The App</h2>
         <label for="value1">Value 1: </label> <br />
         <input type="number" id="value1" min="0" placeholder="Input Value 1 (Decimal)" /> <br /><br />
 
@@ -23,29 +23,31 @@
 
         <button id="btn-submit">Sum (Value1 +Value)</button><br /><br /><br /><br />
         <div class="box">
-            <label for="Decimal">1. Decimal: </label> <br>
-            <input type="text" name="Decimal" id="Decimal_1">
+            <label for="Decimal">1. Decimal: </label> 
+            <input type="text" name="Decimal" id="Decimal_1" disabled>
             <p id="Decimal">Decimal</p>
         </div>
 
         <div class="box">
-            <label for="Binary">2. Binary: </label><br>
+            <label for="Binary">2. Binary: </label>
             <input type="number" name="Binary" id="Binary_1" disabled>
             <p id="Binary">Binary</p>
         </div>
 
         <div class="box">
-            <label for="">3. Octal: </label> <br>
+            <label for="">3. Octal: </label> 
             <input type="number" name="Octal" id="Octal_1" disabled>
             <p id="Octal">Octal</p>
         </div>
+
         <div class="box">
             <label for="">4. Hexadecimal: </label>
             <input type="number" name="Hexadecimal" id="Hexadecimal_1" value="" disabled>
             <p id="Hexadecimal">Hexadecimal</p>
         </div>
         <button id="clear" type="reset">Reset</button><br />
-    </div>
+    </form>
+    
 </body>
 
 </html>
