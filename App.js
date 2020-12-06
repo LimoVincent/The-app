@@ -58,22 +58,22 @@
 
 // Using Jquery
 
-$(document).ready(function () {
+$(document).ready(() => {
     // Functions
     // 1.Sum
     function Sum() {
       let sum1 = parseInt($("#value1").val()) + parseInt($("#value2").val());
       let sum = sum1.toString();
-  
-      //  To <p>
-      $("#Decimal").empty().append(Number.parseInt(sum, 10));
-      $("#Binary").empty().append(Number.parseInt(sum, 2));
+
+      // 1.1 To <p>
+      $("#Decimal").empty().append(sum);
+      $("#Binary").empty().append(getBinary(sum));
       $("#Octal").empty().append(Number.parseInt(sum, 8));
       $("#Hexadecimal").empty().append(Number.parseInt(sum, 16));
-  
-      // to <input>
+
+      // 1.2 to <input>
       $("#Decimal_1").empty().val(Number.parseInt(sum, 10));
-      $("#Binary_1").empty().val(Number.parseInt(sum, 2));
+      $("#Binary_1").empty().val(getBinary(sum));
       $("#Octal_1").empty().val(Number.parseInt(sum, 8));
       $("#Hexadecimal_1").empty().val(Number.parseInt(sum, 16));
     }
@@ -85,7 +85,6 @@ $(document).ready(function () {
       $("#Decimal").css("background-color", getBackgoundColor());
     }
     // 3. getBackgoundColor()
-  
     function getBackgoundColor() {
       const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
       let backgroundColor = "#";
@@ -100,35 +99,50 @@ $(document).ready(function () {
       }
       return backgroundColor;
     }
-  
+
     //4. GetRandomValue()
     function GetRandomValue() {
-      return Math.floor(Math.random() * 10000);
+      return Math.floor(Math.random() * 1000);
     }
-  
+
+    // 5. getBinary()
+    function getBinary(num) {
+      let binary = "";
+      while (num > 0) {
+        if (num % 2 == 0) {
+          binary = binary.concat("0");
+          num = num / 2;
+        } else {
+          binary = binary.concat("1");
+          num = num / 2 - 1;
+        }
+      }
+      return (binary.split("").reverse().join(""));
+    }
+
     $("#btn-submit").click(function (e) {
       e.preventDefault();
       Sum();
       RandomizePColors();
     });
-  
+
     $("#btn-input-randamize").click(function (e) {
       e.preventDefault();
       $("#value1").val(GetRandomValue());
       $("#value2").val(GetRandomValue());
       RandomizePColors();
     });
-  
+
     $("#clear").click(function (e) {
       e.preventDefault();
       $("#value1").empty();
       $("#value2").empty();
-      
+
       $("#Binary").empty();
       $("#Octal").empty();
       $("#Hexadecimal").empty();
       $("#Decimal").empty();
-  
+
       $("#Binary_1").value("");
       $("#Octal_1").value("");
       $("#Hexadecimal_1").value("");
