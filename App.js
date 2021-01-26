@@ -59,93 +59,139 @@
 // Using Jquery
 
 $(document).ready(() => {
-    // Functions
-    // 1.Sum
-    function Sum() {
-      let sum1 = parseInt($("#value1").val()) + parseInt($("#value2").val());
-      let sum = sum1.toString();
+  // Functions
+  // 1.Sum
+  function Sum() {
+    let sum = parseInt($("#value1").val()) + parseInt($("#value2").val());
 
-      // 1.1 To <p>
-      $("#Decimal").empty().append(sum);
-      $("#Binary").empty().append(getBinary(sum));
-      $("#Octal").empty().append(Number.parseInt(sum, 8));
-      $("#Hexadecimal").empty().append(Number.parseInt(sum, 16));
 
-      // 1.2 to <input>
-      $("#Decimal_1").empty().val(Number.parseInt(sum, 10));
-      $("#Binary_1").empty().val(getBinary(sum));
-      $("#Octal_1").empty().val(Number.parseInt(sum, 8));
-      $("#Hexadecimal_1").empty().val(Number.parseInt(sum, 16));
+    // 1.1 To <p>
+    $("#Decimal").empty().append(sum);
+    $("#Binary").empty().append(getBinary(sum));
+    $("#Octal").empty().append(getOctal(sum));
+    $("#Hexadecimal").empty().append(getHex(sum));
+
+    // 1.2 to <input>
+    $("#Decimal_1").empty().val(sum);
+    $("#Binary_1").empty().val(getBinary(sum));
+    $("#Octal_1").empty().val(getOctal(sum));
+    $("#Hexadecimal_1").empty().val(getHex(sum));
+  }
+  // 2. RandomizePColors
+  function RandomizePColors() {
+    $("#Binary").css("background-color", getBackgoundColor());
+    $("#Octal").css("background-color", getBackgoundColor());
+    $("#Hexadecimal").css("background-color", getBackgoundColor());
+    $("#Decimal").css("background-color", getBackgoundColor());
+  }
+  // 3. getBackgoundColor()
+  function getBackgoundColor() {
+    const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+    let backgroundColor = "#";
+    function randomNumber(arr) {
+      return Math.floor(Math.random() * arr.length);
     }
-    // 2. RandomizePColors
-    function RandomizePColors() {
-      $("#Binary").css("background-color", getBackgoundColor());
-      $("#Octal").css("background-color", getBackgoundColor());
-      $("#Hexadecimal").css("background-color", getBackgoundColor());
-      $("#Decimal").css("background-color", getBackgoundColor());
-    }
-    // 3. getBackgoundColor()
-    function getBackgoundColor() {
-      const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
-      let backgroundColor = "#";
-      function randomNumber(arr) {
-        return Math.floor(Math.random() * arr.length);
+    for (let i = 0; i < 6; i++) {
+      backgroundColor += hex[randomNumber(hex)];
+      if (backgroundColor === "#000000") {
+        backgroundColor = "#FDFEFE";
       }
-      for (let i = 0; i < 6; i++) {
-        backgroundColor += hex[randomNumber(hex)];
-        if (backgroundColor === "#000000") {
-          backgroundColor = "#FDFEFE";
-        }
+    }
+    return backgroundColor;
+  }
+
+  //4. GetRandomValue()
+  function GetRandomValue() {
+    return Math.floor(Math.random() * 1000);
+  }
+
+  // 5. getBinary()
+  function getBinary(num) {
+    let binary = "";
+    while (num > 0) {
+      let rem = num % 2;
+      binary = binary.concat(rem.toString());
+      num = (num / 2) - rem;
+    };
+    // return binary.split("").reverse().join("");
+    return "Under Costruction";
+
+  }
+
+  // getOctal(num)
+
+  function getOctal(num) {
+    let octal = "";
+    while (num > 8) {
+      let rem = (num % 8);
+      octal = octal.concat(rem.toString());
+      num = (num / 16) - rem;
+    }
+    // return octal.split("").reverse().join("");
+    return "Under Costruction";
+  }
+
+  // GetHex()
+  function getHex(num) {
+    let hex = "";
+    while (num > 16) {
+      let rem = (num % 16);
+      switch (rem) {
+        case 15:
+          hex = hex.concat("F");
+          break;
+        case 14:
+          hex = hex.concat("E");
+          break;
+        case 13:
+          hex = hex.concat("D");
+          break;
+        case 12:
+          hex = hex.concat("C");
+          break;
+        case 11:
+          hex = hex.concat("B");
+          break;
+        case 10:
+          hex = hex.concat("A");
+          break;
+        default:
+          hex = hex.concat(rem.toString());
+          break;
       }
-      return backgroundColor;
+      num = (num / 16 )- rem;
     }
+    // return hex.split("").reverse().join("");
+    return "Under Costruction";
 
-    //4. GetRandomValue()
-    function GetRandomValue() {
-      return Math.floor(Math.random() * 1000);
-    }
+  }
 
-    // 5. getBinary()
-    function getBinary(num) {
-      let binary = "";
-      while (num > 0) {
-        if (num % 2 == 0) {
-          binary = binary.concat("0");
-          num = num / 2;
-        } else {
-          binary = binary.concat("1");
-          num = num / 2 - 1;
-        }
-      }
-      return (binary.split("").reverse().join(""));
-    }
-
-    $("#btn-submit").click(function (e) {
-      e.preventDefault();
-      Sum();
-      RandomizePColors();
-    });
-
-    $("#btn-input-randamize").click(function (e) {
-      e.preventDefault();
-      $("#value1").val(GetRandomValue());
-      $("#value2").val(GetRandomValue());
-      RandomizePColors();
-    });
-
-    $("#clear").click(function (e) {
-      e.preventDefault();
-      $("#value1").empty();
-      $("#value2").empty();
-
-      $("#Binary").empty();
-      $("#Octal").empty();
-      $("#Hexadecimal").empty();
-      $("#Decimal").empty();
-
-      $("#Binary_1").value("");
-      $("#Octal_1").value("");
-      $("#Hexadecimal_1").value("");
-      $("#Decimal_1").value("");
-    });
+  $("#btn-submit").click(function (e) {
+    e.preventDefault();
+    Sum();
+    RandomizePColors();
   });
+
+  $("#btn-input-randamize").click(function (e) {
+    e.preventDefault();
+    $("#value1").val(GetRandomValue());
+    $("#value2").val(GetRandomValue());
+    RandomizePColors();
+  });
+
+  $("#clear").click(function (e) {
+    e.preventDefault();
+    $("#value1").val("");
+    $("#value2").val("");
+
+    $("#Binary").empty();
+    $("#Octal").empty();
+    $("#Hexadecimal").empty();
+    $("#Decimal").empty();
+
+    $("#Binary_1").val("");
+    $("#Octal_1").val("");
+    $("#Hexadecimal_1").val("");
+    $("#Decimal_1").val("");
+  });
+});
